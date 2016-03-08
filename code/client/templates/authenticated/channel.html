@@ -1,0 +1,17 @@
+<template name="channel">
+  {{> sidebar}}
+
+  <div class="conversation">
+    <div class="messages-list-wrap">
+      <div class="messages-list">
+        {{#each messages}}
+          {{> message}}
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="message-input">
+      <input name="message" placeholder="Type your message here...">
+    </div>
+  </div>
+</template>

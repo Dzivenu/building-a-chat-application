@@ -14,6 +14,14 @@ let _seedUsers = () => {
   });
 };
 
+let _seedChannels = () => {
+  seed( 'channels', {
+    environments: [ 'development', 'staging', 'production' ],
+    data: [ { name: 'general' } ]
+  });
+};
+
 export default function() {
   _seedUsers();
+  _seedChannels();
 }

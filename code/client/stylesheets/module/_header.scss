@@ -1,0 +1,12 @@
+.navbar.navbar-default {
+  border-radius: 0px;
+  border-bottom: 1px solid #eee;
+
+  .navbar-brand > span {
+    position: relative;
+    top: -1px;
+    left: 10px;
+    font-size: 14px;
+    color: #aaa;
+  }
+}

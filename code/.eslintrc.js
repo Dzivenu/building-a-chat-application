@@ -14,8 +14,10 @@ module.exports = {
   'globals': {
     'Bert': true,
     'BlazeLayout': true,
-    'Documents': true,
+    'Channels': true,
+    'document': true,
     'FlowRouter': true,
+    'Messages': true,
     'moment': true,
     'parseMarkdown': true,
     'Roles': true,
