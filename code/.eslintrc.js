@@ -15,11 +15,13 @@ module.exports = {
     'Bert': true,
     'BlazeLayout': true,
     'Channels': true,
+    'Counts': true,
     'document': true,
     'FlowRouter': true,
     'Messages': true,
     'moment': true,
     'parseMarkdown': true,
+    'ReadLog': true,
     'Roles': true,
     'SimpleSchema': true
   },

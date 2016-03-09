@@ -9,10 +9,12 @@ const handleRedirect = ( routes, redirect ) => {
 Template.default.onRendered( () => {
   Tracker.autorun( () => {
     FlowRouter.watchPathChange();
-    let isChannel   = FlowRouter.getParam( 'channel' ),
-        bodyClasses = document.body.classList;
+    let isChannel = FlowRouter.getParam( 'channel' );
 
-    return isChannel ? bodyClasses.add( 'is-channel' ) : bodyClasses.remove( 'is-channel' );
+    if ( isChannel ) {
+      let bodyClasses = document.body.classList;
+      return isChannel ? bodyClasses.add( 'is-channel' ) : bodyClasses.remove( 'is-channel' );
+    }
   });
 });
 

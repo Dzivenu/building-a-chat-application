@@ -1,17 +1,20 @@
 Meteor.publish( 'channel', function( isDirect, channel ) {
   check( isDirect, Boolean );
   check( channel, String );
+  
+  let updateLog = ( query ) => {
+    ReadLog.upsert( query, { $set: { timestamp: new Date() } } );
+  };
 
   if ( isDirect ) {
-    let user = channel.replace( '@', '' );
+    let user = Meteor.users.findOne( { username: channel.replace( '@', '' ) } );
+    updateLog( { channel: user._id, owner: this.userId }, this.userId );
     return Messages.find({
-      $or: [
-        { owner: this.userId, to: user },
-        { owner: user, to: this.userId }
-      ]
-    });
+      $or: [ { owner: this.userId, to: user._id }, { owner: user._id, to: this.userId } ]
+    });;
   } else {
     let selectedChannel = Channels.findOne( { name: channel } );
-    return selectedChannel ? Messages.find( { channel: selectedChannel._id } ) : [];
+    updateLog( { channel: selectedChannel._id, owner: this.userId }, this.userId );
+    return Messages.find( { channel: selectedChannel._id } );
   }
 });

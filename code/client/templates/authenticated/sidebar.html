@@ -4,7 +4,12 @@
     <ul>
       {{#each channel in channels}}
         <li class="{{currentChannel channel.name}}">
-          <a href="/messages/{{channel.name}}">#{{channel.name}}</a>
+          <a href="/messages/{{channel.name}}">
+            #{{channel.name}}
+            {{#if unreadCount channel._id}}
+              <span class="unread">{{unreadCount channel._id}}</span>
+            {{/if}}
+          </a>
         </li>
       {{/each}}
     </ul>
@@ -12,8 +17,13 @@
     <h5>Direct Messages</h5>
     <ul>
       {{#each user in users}}
-        <li class="{{currentChannel user._id}}">
-          <a href="/messages/@{{user._id}}">{{fullName user.profile.name}}</a>
+        <li class="{{currentChannel user.username}}">
+          <a href="/messages/@{{user.username}}">
+            {{fullName user.profile.name}}
+            {{#if unreadCount user._id}}
+              <span class="unread">{{unreadCount user._id}}</span>
+            {{/if}}
+          </a>
         </li>
       {{/each}}
     </ul>

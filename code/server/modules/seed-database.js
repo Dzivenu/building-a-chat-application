@@ -4,6 +4,7 @@ let _seedUsers = () => {
   seed( 'users', {
     environments: [ 'development', 'staging', 'production' ],
     data: [{
+      username: 'bigguy1991',
       email: 'admin@admin.com',
       password: 'password',
       profile: {
@@ -11,6 +12,7 @@ let _seedUsers = () => {
       },
       roles: [ 'admin' ]
     },{
+      username: 'beetsfan123',
       email: 'doug@admin.com',
       password: 'password',
       profile: {

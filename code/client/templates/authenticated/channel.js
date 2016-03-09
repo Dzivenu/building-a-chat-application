@@ -1,39 +1,52 @@
-let setScroll = ( type ) => {
-  let messages = document.getElementById( 'messages' ),
-      changing = type === 'changeChannel';
+let setScroll = ( template ) => {
+  let messages = document.getElementById( 'messages' );
+  setTimeout( () => { messages.scrollTop = messages.scrollHeight; }, 300 );
 
-  if ( changing ) { messages.style.opacity = 0; }
-
-  setTimeout( () => { messages.scrollTop = messages.scrollHeight; }, 100 );
-  setTimeout( () => { if ( changing ) { messages.style.opacity = 1; } }, 200 );
+  if ( template ) {
+    setTimeout( () => { template.loading.set( false ); }, 300 );
+  }
 };
 
 Template.channel.onCreated( () => {
   let template = Template.instance();
 
   template.isDirect = new ReactiveVar();
+  template.loading  = new ReactiveVar( true );
 
   Tracker.autorun( () => {
-    FlowRouter.watchPathChange();
-    let channel  = FlowRouter.getParam( 'channel' ),
-        isDirect = channel.includes( '@' );
+    let channel = FlowRouter.getParam( 'channel' );
 
-    template.isDirect.set( isDirect );
-    template.subscribe( 'channel', isDirect, channel, () => {
-      setScroll( 'changeChannel' );
-    });
+    if ( channel ) {
+      let isDirect = channel.includes( '@' );
+
+      template.loading.set( true );
+      template.isDirect.set( isDirect );
+
+      template.subscribe( 'channel', isDirect, channel, () => {
+        setScroll( template );
+      });
+    }
   });
 });
 
 Template.channel.onRendered( () => {
-  setScroll();
-
   Messages.find().observeChanges({
-    add() { setScroll( 'newMessage' ); }
-  })
+    added( id, fields ) {
+      setScroll();
+    }
+  });
 });
 
 Template.channel.helpers({
+  isLoading() {
+    return Template.instance().loading.get();
+  },
+  isDirect() {
+    return Template.instance().isDirect.get();
+  },
+  username() {
+    return FlowRouter.getParam( 'channel' );
+  },
   messages() {
     let messages = Messages.find( {}, { sort: { timestamp: 1 } } );
     if ( messages ) {
@@ -67,12 +80,13 @@ Template.channel.events({
         message: template.find( '[name="message"]' ).value
       };
 
+      setScroll();
+
       Meteor.call( 'insertMessage', message, ( error ) => {
         if ( error ) {
           Bert.alert( error.reason, 'danger' );
         } else {
           event.target.value = '';
-          setScroll( 'newMessage' );
         }
       });
     }

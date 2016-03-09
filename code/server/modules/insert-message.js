@@ -22,9 +22,16 @@ let _getChannelId = ( channelName ) => {
   }
 };
 
+let _getUserId = ( username ) => {
+  let user = Meteor.users.findOne( { username: username } );
+  if ( user ) {
+    return user._id;
+  }
+};
+
 let _assignDestination = ( message ) => {
   if ( message.isDirect ) {
-    message.to = message.destination;
+    message.to = _getUserId( message.destination );
   } else {
     let channelId = _getChannelId( message.destination );
     message.channel = channelId;

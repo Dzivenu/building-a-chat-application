@@ -1,3 +1,7 @@
+$red: #DA5347;
+$blue: #1B9EDB;
+$green: #75BA50;
+
 body.is-channel .container {
   width: 100%;
 }
@@ -13,14 +17,13 @@ body.is-channel .container {
 .sidebar {
   left: 0;
   width: 250px;
-  background: #fafafa;
-  border-right: 1px solid #eee;
+  background: $blue;
   padding: 20px;
 
   h5 {
     text-transform: uppercase;
     font-size: 12px;
-    color: #888;
+    color: darken( $blue, 20% );
     margin: 0;
   }
 
@@ -42,22 +45,39 @@ body.is-channel .container {
     display: block;
     padding: 5px 10px 5px 20px;
     border-radius: 0 3px 3px 0;
-    color: #444;
+    color: lighten( $blue, 40% );
     text-decoration: none;
-    border: 1px solid transparent;
     border-left: none;
   }
 
   a:hover {
-    background: #eee;
+    background: darken( $blue, 10% );
   }
 
   .active a,
   .active a:hover {
     background: #fff;
-    color: #0099ff;
-    border: 1px solid #eee;
+    color: $blue;
     border-left: none;
+
+    .unread {
+      background: $blue;
+      color: #fff;
+    }
+  }
+
+  a .unread {
+    position: relative;
+    top: 2px;
+    float: right;
+    background: #fff;
+    color: $blue;
+    font-size: 11px;
+    font-weight: bold;
+    width: 25px;
+    text-align: center;
+    padding: 1px 0 2px;
+    border-radius: 30px;
   }
 }
 
@@ -65,6 +85,7 @@ body.is-channel .container {
   left: 250px;
   width: calc( 100% - 250px );
   background: #fff;
+  border-top: 1px solid #eee;
 
   .message-input {
     background: #fff;
@@ -98,16 +119,19 @@ body.is-channel .container {
     padding: 20px 20px 0;
   }
 
-  #messages.loading-messages {
-    opacity: 0;
-  }
-
   .messages-list {
+    width: 100%;
     max-height: 100%;
     align-self: flex-end;
+    opacity: 1;
+
+    &.loading-list {
+      opacity: 0;
+    }
   }
 
-  .messages-list .message:not( :last-child ) {
+  .messages-list .message:not( :last-child ),
+  .messages-list svg {
     margin-bottom: 15px;
   }
 
