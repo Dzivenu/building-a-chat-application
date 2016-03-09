@@ -17,7 +17,7 @@ Template.sidebar.helpers({
     }
   },
   users() {
-    let users = Meteor.users.find();
+    let users = Meteor.users.find( { _id: { $not: Meteor.userId() } } );
     if ( users ) {
       return users;
     }

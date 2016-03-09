@@ -67,6 +67,7 @@ body.is-channel .container {
   background: #fff;
 
   .message-input {
+    background: #fff;
     position: absolute;
     bottom: 52px;
     left: 0;
@@ -87,5 +88,52 @@ body.is-channel .container {
   .message-input input:focus {
     outline: 0;
     border-color: #ddd;
+  }
+
+  #messages {
+    display: flex;
+    overflow: auto;
+    height: calc( 100% - 122px );
+    background: #fff;
+    padding: 20px 20px 0;
+  }
+
+  #messages.loading-messages {
+    opacity: 0;
+  }
+
+  .messages-list {
+    max-height: 100%;
+    align-self: flex-end;
+  }
+
+  .messages-list .message:not( :last-child ) {
+    margin-bottom: 15px;
+  }
+
+  .messages-list .message:last-child {
+    margin-bottom: 20px;
+  }
+
+  .message header h4 {
+    font-size: 14px;
+  }
+
+  .message header h4 span {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 13px;
+    font-weight: normal;
+    color: #888;
+  }
+
+  .message > *:first-child,
+  .message > header > *:first-child {
+    margin-top: 0px;
+  }
+
+  .message > *:last-child,
+  .message > .body > *:last-child {
+    margin-bottom: 0px;
   }
 }
