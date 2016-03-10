@@ -1,8 +1,12 @@
 import initReadLogs from '../../modules/init-read-logs';
+import updateReadLogs from '../../modules/update-read-logs';
 
 Meteor.methods({
-  getUnreadCount() {
+  getUnreadCount( filter ) {
+    check( filter, Object );
+
     initReadLogs( this.userId );
+    updateReadLogs( filter, this.userId );
 
     let channels = Channels.find( {}, { fields: { _id: 1 } } ).fetch(),
         users    = Meteor.users.find( { _id: { $ne: this.userId } }, { fields: { _id: 1 } } ).fetch(),
@@ -24,6 +28,8 @@ Meteor.methods({
         counts[ `unread_${ this.userId }_${ channelId }` ] = messagesCount;
       }
     }
+
+    console.log( counts );
 
     return counts;
   }

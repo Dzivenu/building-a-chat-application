@@ -1,12 +1,19 @@
-// let fetchUnreadCount = ( template ) => {
-//   Meteor.call( 'getUnreadCount', ( error, response ) => {
-//     if ( error ) {
-//       console.log( error );
-//     } else {
-//       template.counts.set( response );
-//     }
-//   });
-// };
+let fetchUnreadCount = ( template ) => {
+  let channel = FlowRouter.getParam( 'channel' );
+
+  if ( channel ) {
+    let isDirect = channel.includes( '@' ),
+        filter   = { channel: channel, isDirect: isDirect };
+
+    Meteor.call( 'getUnreadCount', filter, ( error, response ) => {
+      if ( error ) {
+        console.log( error );
+      } else {
+        template.counts.set( response );
+      }
+    });
+  }
+};
 
 Template.sidebar.onCreated( () => {
   let template = Template.instance();
@@ -38,10 +45,10 @@ Template.sidebar.helpers({
     }
   },
   unreadCount( channel ) {
-    // let counts = Template.instance().counts.get();
-    // if ( counts ) {
-    //   return counts[ `unread_${ Meteor.userId() }_${ channel }` ];
-    // }
+    let counts = Template.instance().counts.get();
+    if ( counts ) {
+      return counts[ `unread_${ Meteor.userId() }_${ channel }` ];
+    }
   },
   fullName( name ) {
     if ( name ) {
