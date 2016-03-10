@@ -8,7 +8,6 @@ const handleRedirect = ( routes, redirect ) => {
 
 Template.default.onRendered( () => {
   Tracker.autorun( () => {
-    FlowRouter.watchPathChange();
     let isChannel = FlowRouter.getParam( 'channel' );
 
     if ( isChannel ) {
