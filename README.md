@@ -7,6 +7,6 @@ In this recipe, we'll learn how to build a simple chat application. We'll learn 
 
 [Demo the Recipe](http://tmc-building-a-chat-application-demo.meteor.com)
 
-[Download the Source](https://github.com/themeteorchef/building-a-chat-application/archive/master.zip)
+[Download the Source](building-a-chat-application/archive/master.zip)
 
 The code for this recipe is licensed under the [MIT License](http://opensource.org/licenses/MIT).
