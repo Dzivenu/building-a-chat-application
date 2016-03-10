@@ -1,7 +1,5 @@
 Template.sidebar.onCreated( () => {
   let template = Template.instance();
-
-  template.counts = new ReactiveVar( {} );
   template.subscribe( 'sidebar' );
 });
 
@@ -19,7 +17,7 @@ Template.sidebar.helpers({
     }
   },
   users() {
-    let users = Meteor.users.find( { _id: { $not: Meteor.userId() } } );
+    let users = Meteor.users.find( { _id: { $ne: Meteor.userId() } } );
     if ( users ) {
       return users;
     }

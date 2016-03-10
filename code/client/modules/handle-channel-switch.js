@@ -1,10 +1,5 @@
 import setScroll from './set-scroll';
 
-let _setupReactiveVariables = ( template ) => {
-  template.isDirect = new ReactiveVar();
-  template.loading  = new ReactiveVar( true );
-};
-
 let _establishSubscription = ( template, isDirect, channel ) => {
   template.subscribe( 'channel', isDirect, channel, () => {
     setScroll( 'messages' );
@@ -21,6 +16,11 @@ let _handleSwitch = ( template ) => {
     template.loading.set( true );
     _establishSubscription( template, isDirect, channel );
   }
+};
+
+let _setupReactiveVariables = ( template ) => {
+  template.isDirect = new ReactiveVar();
+  template.loading  = new ReactiveVar( true );
 };
 
 export default function( template ) {

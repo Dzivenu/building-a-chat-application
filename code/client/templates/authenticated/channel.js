@@ -1,5 +1,5 @@
-import sortMessages from '../../modules/sort-messages';
 import handleChannelSwitch from '../../modules/handle-channel-switch';
+import sortMessages from '../../modules/sort-messages';
 import handleMessageInsert from '../../modules/handle-message-insert';
 
 Template.channel.onCreated( () => {
