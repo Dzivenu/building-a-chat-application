@@ -22,7 +22,6 @@ let _handleInsert = ( message, event, template ) => {
     if ( error ) {
       Bert.alert( error.reason, 'danger' );
     } else {
-      setScroll( 'messages' );
       event.target.value = '';
     }
   });
@@ -33,6 +32,7 @@ export default function( event, template ) {
       canInsert = _checkIfCanInsert( text, event );
 
   if ( canInsert ) {
+    setScroll( 'messages' );
     _handleInsert( _buildMessage( template ), event, template );
   }
 }

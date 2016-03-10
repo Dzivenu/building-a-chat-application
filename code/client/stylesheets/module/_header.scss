@@ -1,6 +1,5 @@
 .navbar.navbar-default {
   border-radius: 0px;
-  border-bottom: none;
   background: #fff;
 
   .navbar-brand > span {
@@ -10,4 +9,8 @@
     font-size: 14px;
     color: #aaa;
   }
+}
+
+body.is-channel .navbar.navbar-default {
+  border-bottom: none;
 }
