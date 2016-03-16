@@ -1,7 +1,7 @@
 import seed from 'meteor/themeteorchef:seeder';
 
 let _seedUsers = () => {
-  seed( 'users', {
+  Seed( 'users', {
     environments: [ 'development', 'staging', 'production' ],
     data: [{
       username: 'bigguy1991',
@@ -24,7 +24,7 @@ let _seedUsers = () => {
 };
 
 let _seedChannels = () => {
-  seed( 'channels', {
+  Seed( 'channels', {
     environments: [ 'development', 'staging', 'production' ],
     data: [ { name: 'general' } ]
   });
